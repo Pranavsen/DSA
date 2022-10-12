@@ -1,0 +1,56 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Node{
+    public:
+    int val;
+    Node* left;
+    Node* right;
+    Node(int x){
+        val=x;
+    }
+    
+};
+ int idx=0;
+    map<int,int>m;
+    
+    Node*solve(vector<int>& preorder, vector<int>& inorder,int lb,int ub){
+        if(lb>ub) return NULL;
+        
+        Node* res=new Node(preorder[idx++]);
+        if(lb==ub) return res;
+        int mid=m[res->val];
+        res->left=solve(preorder, inorder,lb,mid-1);
+        res->right=solve(preorder, inorder,mid+1, ub);
+            
+            return res;
+    }
+    
+    Node* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        
+        for(int i=0;i<inorder.size();i++)   m[inorder[i]]=i;   
+        Node* root= solve(preorder,inorder,0,inorder.size()-1);
+            return root;
+    }
+void printPostorder(Node* ans){
+    if(ans==NULL) return;
+    printPostorder(ans->left);
+    printPostorder(ans->right);
+    cout<<ans->val<<" ";
+}
+int main()
+{
+   vector<int> in{ 3,1,4,0,5,2 };
+    vector<int> pre{ 0,1,3,4,2,5};
+   Node* ans=buildTree(pre,in);
+   printPostorder(ans);
+    return 0;
+}
