@@ -25,6 +25,19 @@ using namespace std;
         size--;
         heapify(arr,size,1);
     }
+    cout<<"heapify sort: ";
+        for(int i=1;i<=n;i++){
+            cout<<arr[i]<<" ";
+        }
+    }
+    void heapify(int arr[],int n){
+        for(int i=n/2;i>0;i--){
+            heapify(arr,n,i);
+        }
+        cout<<"heapify element: "; 
+        for(int i=1;i<=n;i++){
+            cout<<arr[i]<<" ";
+        }
     }
    
    
@@ -33,19 +46,10 @@ int main(){
     int arr[6]={-1,54,53,55,52,50};
     int n=5;
 
-     for(int i=n/2;i>0;i--){
-            heapify(arr,n,i);
-        }
-        cout<<"heapify element: "; 
-        for(int i=1;i<=n;i++){
-            cout<<arr[i]<<" ";
-        }
-        
-        cout<<endl;
+     
+    heapify(arr,n);
+    cout<<endl;
     heapsort(arr,n);
-        cout<<"heapify sort: ";
-        for(int i=1;i<=n;i++){
-            cout<<arr[i]<<" ";
-        }
+        
     return 0;
 }
